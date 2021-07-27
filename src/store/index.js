@@ -3,12 +3,20 @@ import api from '../hook/api'
 
 const store = createStore({
   state: {
+    data: []
   },
   mutations: {
+    setData: (state, data) => state.data = data
   },
   actions: {
-    init () {
+    init ({ commit }) {
       api.getFullData()
+        .then(res => commit('setData', res))
+    }
+  },
+  getters: {
+    getLastData (state) {
+      return state.data[0]
     }
   }
 })
