@@ -1,4 +1,18 @@
 <template>
-  <img alt="Vue logo" src="../assets/logo.png">
-  <h2>Hi! 快速使用vue3做出網頁template</h2>
+  <div class="bob">
+    Hi
+  </div>
 </template>
+
+<script>
+export default {
+  setup () {
+    return {
+
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+</style>

@@ -3,6 +3,18 @@ module.exports = {
     sourceMap: false
   },
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue3-template/'
-    : '/'
+    ? '/covid-map/'
+    : '/',
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://covid-19.nchc.org.tw/api',
+        //ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  }
 }

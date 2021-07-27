@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import api from '../hook/api'
 
 const store = createStore({
   state: {
@@ -6,6 +7,9 @@ const store = createStore({
   mutations: {
   },
   actions: {
+    init () {
+      api.getFullData()
+    }
   }
 })
 

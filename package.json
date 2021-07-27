@@ -1,5 +1,5 @@
 {
-  "name": "vue3-template",
+  "name": "covid-map",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@j-t-mcc/vue3-chartjs": "^1.1.2",
+    "axios": "^0.21.1",
+    "chart.js": "^3.5.0",
     "core-js": "^3.15.1",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.2.0",
