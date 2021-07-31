@@ -17,6 +17,15 @@ const store = createStore({
   getters: {
     getLastData (state) {
       return state.data[0]
+    },
+    getChartLabel (state) {
+      return state.data.map(item => item.a04).reverse()
+    },
+    getChartData (state) {
+      return state.data.map(item => parseInt(item.a06)).reverse()
+    },
+    getFullAmount (state) {
+      return state.data.map(item => parseInt(item.a05)).reverse()
     }
   }
 })

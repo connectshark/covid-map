@@ -1,42 +1,44 @@
 <template>
-<div class="report">
-  <h2 class="report-title">台灣疫情報告</h2>
-  <div class="view-group" v-if="lastDayData">
-    <div class="view-item">
-      <h3 class="title">累積確診</h3>
-      <p class="main">{{lastDayData.a05}}</p>
-    </div>
-    <div class="view-item">
-      <h3 class="title">新增確診</h3>
-      <p class="main">+{{lastDayData.a06}}</p>
-    </div>
-    <div class="view-item">
-      <h3 class="title">累積死亡</h3>
-      <p class="main">{{lastDayData.a08}}</p>
-      <p class="detail">新增死亡數 +{{lastDayData.a09}}</p>
-    </div>
-    <div class="view-item">
-      <h3 class="title">疫苗總接種人數</h3>
-      <p class="main">{{lastDayData.a21}}</p>
-      <p class="detail">新增疫苗接種劑數 +{{lastDayData.a22}}</p>
-    </div>
+<h2 class="report-title">台灣疫情報告</h2>
+<div class="view-group" v-if="lastDayData">
+  <div class="view-item">
+    <h3 class="title">累積確診</h3>
+    <p class="main">{{lastDayData.a05}}</p>
+  </div>
+  <div class="view-item">
+    <h3 class="title">新增確診</h3>
+    <p class="main">+{{lastDayData.a06}}</p>
+  </div>
+  <div class="view-item">
+    <h3 class="title">累積死亡</h3>
+    <p class="main">{{lastDayData.a08}}</p>
+    <p class="detail">新增死亡數 +{{lastDayData.a09}}</p>
+  </div>
+  <div class="view-item">
+    <h3 class="title">疫苗總接種人數</h3>
+    <p class="main">{{lastDayData.a21}}</p>
+    <p class="detail">新增疫苗接種劑數 +{{lastDayData.a22}}</p>
   </div>
 </div>
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, defineComponent, watch } from 'vue'
 import { useStore } from 'vuex'
 
-export default {
+export default defineComponent({
   setup () {
-    const store = useStore()
-    const lastDayData = computed(() => store.getters.getLastData)
-    return {
-      lastDayData
-    }
+    return new Promise((resolve) => {
+      const store = useStore()
+      const lastDayData = computed(() => store.getters.getLastData)
+      watch(lastDayData, () => {
+        resolve({
+          lastDayData
+        })
+      })
+    })
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
