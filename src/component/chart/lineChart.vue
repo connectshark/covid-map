@@ -10,8 +10,10 @@
 
 <script>
 import VueHighcharts from 'vue3-highcharts'
-import { computed, defineComponent, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { useStore } from 'vuex'
+import time from '../../lib/time'
+
 export default defineComponent({
   components: {
     VueHighcharts
@@ -20,9 +22,9 @@ export default defineComponent({
     return new Promise(resolve => {
       const store = useStore()
 
+      const xMin = ref(time.formatter('2021-01-01'))
 
       const seriesData = computed(() => store.getters.getChartData)
-      const categories = computed(() => store.getters.getChartLabel)
 
       const chartOptions = computed(() => ({
         chart: {
@@ -34,8 +36,8 @@ export default defineComponent({
           text: '每日確診人數',
         },
         xAxis: {
-          categories: categories.value,
-          minTickInterval: 60
+          type: 'datetime',
+          min: xMin.value
         },
         yAxis: {
           title: {

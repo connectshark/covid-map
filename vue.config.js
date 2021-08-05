@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   css: {
     sourceMap: false
@@ -5,6 +7,10 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/covid-map/'
     : '/',
+  
+  chainWebpack: config => {
+    config.plugin('ignore').use(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+  },
   devServer: {
     proxy: {
       '/api': {

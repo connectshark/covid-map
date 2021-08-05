@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 import api from '../hook/api'
+import time from '../lib/time'
 
 const store = createStore({
   state: {
-    data: []
+    data: [],
   },
   mutations: {
     setData: (state, data) => state.data = data
@@ -22,7 +23,9 @@ const store = createStore({
       return state.data.map(item => item.a04).reverse()
     },
     getChartData (state) {
-      return state.data.map(item => parseInt(item.a06)).reverse()
+      return state.data.map(item => {
+        return [time.formatter(item.a04), parseInt(item.a06)]
+      }).reverse()
     },
     getFullAmount (state) {
       return state.data.map(item => parseInt(item.a05)).reverse()

@@ -5,30 +5,30 @@
     <p v-if="lastDayData">最後更新日期{{lastDayData.a04}}</p>
   </div>
   <div class="report">
-  <Suspense>
-    <template #default>
-      <Report/>
-    </template>
-    <template #fallback>
-      <Loading/>
-    </template>
-  </Suspense>
+    <Suspense>
+      <template #default>
+        <Report/>
+      </template>
+      <template #fallback>
+        <Loading/>
+      </template>
+    </Suspense>
   </div>
   <div class="report">
-  <Suspense>
-    <template #default>
-      <LineChart/>
-    </template>
-    <template #fallback>
-      <Loading/>
-    </template>
-  </Suspense>
+    <Suspense>
+      <template #default>
+        <LineChart/>
+      </template>
+      <template #fallback>
+        <Loading/>
+      </template>
+    </Suspense>
   </div>
 </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import Report from '../component/report'
 import LineChart from '../component/chart/lineChart'
@@ -44,8 +44,11 @@ export default {
     const store = useStore()
     const lastDayData = computed(() => store.getters.getLastData)
 
+    const date = ref('')
+
     return {
-      lastDayData
+      lastDayData,
+      date
     }
   }
 }
