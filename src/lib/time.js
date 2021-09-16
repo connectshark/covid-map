@@ -5,8 +5,8 @@ const time = {
     return dayjs(date, 'YYYY-MM-DD').format('M/DD')
   },
 
-  filter (date) {
-    return dayjs(date, 'YYYY-MM-DD').isAfter(dayjs('2021-01-01'))
+  filter (date, afterDate = '2021-01-01') {
+    return dayjs(date, 'YYYY-MM-DD').isAfter(dayjs(afterDate))
   }
 }
 

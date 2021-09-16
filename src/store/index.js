@@ -11,7 +11,7 @@ const store = createStore({
   },
   actions: {
     init ({ commit }) {
-      api.getFullData()
+      api.getFullData(4001)
         .then(res => commit('setData', res))
     }
   },

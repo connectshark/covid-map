@@ -1,9 +1,8 @@
 <template>
   <div>
     <vue3-chart-js
-      :id="'doughnut'"
+      :id="'person'"
       :type="'line'"
-      ref="chartRef"
       :data="data"
       :options="options"
     ></vue3-chart-js>
@@ -12,7 +11,7 @@
 
 <script>
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useStore } from 'vuex'
 export default {
   name: 'home',
@@ -20,9 +19,9 @@ export default {
     Vue3ChartJs,
   },
   setup () {
+    return new Promise(resolve => {
     const store = useStore()
     const lineData = computed(() => store.getters.lineChartData)
-    const chartRef = ref(null)
     const data = {
       datasets:[{
         label: '確診人數',
@@ -36,6 +35,9 @@ export default {
     }
     const options = {
       responsive: true,
+      layout: {
+        padding: 10
+      },
       plugins: {
         legend: {
           position: 'bottom'
@@ -56,13 +58,12 @@ export default {
 
     watch(lineData, value => {
       data.datasets[0].data = value
-      chartRef.value.update()
+      resolve ({
+        options,
+        data
+      })
     })
-    return {
-      options,
-      data,
-      chartRef
-    }
+    })
   },
 }
 </script>
