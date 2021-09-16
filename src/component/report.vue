@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { computed, defineComponent, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useStore } from 'vuex'
 
-export default defineComponent({
+export default {
   setup () {
     return new Promise((resolve) => {
       const store = useStore()
@@ -38,7 +38,7 @@ export default defineComponent({
       })
     })
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

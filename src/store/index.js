@@ -19,16 +19,16 @@ const store = createStore({
     getLastData (state) {
       return state.data[0]
     },
-    getChartLabel (state) {
-      return state.data.map(item => item.a04).reverse()
-    },
-    getChartData (state) {
-      return state.data.map(item => {
-        return [time.formatter(item.a04), parseInt(item.a06)]
-      }).reverse()
-    },
-    getFullAmount (state) {
-      return state.data.map(item => parseInt(item.a05)).reverse()
+
+    lineChartData (state) {
+      return state.data.filter(item => {
+        return time.filter(item.a04)
+      }).reverse().map(item => {
+        return {
+          x: time.formatter(item.a04),
+          y: parseInt(item.a06)
+        }
+      })
     }
   }
 })

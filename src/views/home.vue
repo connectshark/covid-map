@@ -15,14 +15,7 @@
     </Suspense>
   </div>
   <div class="report">
-    <Suspense>
-      <template #default>
-        <LineChart/>
-      </template>
-      <template #fallback>
-        <Loading/>
-      </template>
-    </Suspense>
+    <LineChart/>
   </div>
 </div>
 </template>
@@ -31,14 +24,14 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import Report from '../component/report'
-import LineChart from '../component/chart/lineChart'
 import Loading from '../component/loading'
+import LineChart from '../component/lineChart'
 
 export default {
   components: {
     Report,
-    LineChart,
-    Loading
+    Loading,
+    LineChart
   },
   setup () {
     const store = useStore()
@@ -56,11 +49,9 @@ export default {
 
 <style lang="scss" scoped>
 .home{
-  background-color: #446AF1;
   padding: 20px 0;
   .banner{
     padding: 20px 0;
-    color: #fff;
     text-align: center;
     h1{
       font-size: 40px;

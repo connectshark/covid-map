@@ -1,8 +1,12 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 const time = {
   formatter (date) {
-    return parseInt(moment(date, 'YYYY-MM-DD').format('x'))
+    return dayjs(date, 'YYYY-MM-DD').format('M/DD')
+  },
+
+  filter (date) {
+    return dayjs(date, 'YYYY-MM-DD').isAfter(dayjs('2021-01-01'))
   }
 }
 
