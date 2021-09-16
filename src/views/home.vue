@@ -34,6 +34,16 @@
       </template>
     </Suspense>
   </div>
+  <div class="report">
+    <Suspense>
+      <template #default>
+        <Az/>
+      </template>
+      <template #fallback>
+        <Loading/>
+      </template>
+    </Suspense>
+  </div>
 </div>
 </template>
 
@@ -44,13 +54,15 @@ import Report from '../component/report'
 import Loading from '../component/loading'
 import LineChart from '../component/lineChart'
 import BarChart from '../component/barChart'
+import Az from '../component/az'
 
 export default {
   components: {
     Report,
     Loading,
     LineChart,
-    BarChart
+    BarChart,
+    Az
   },
   setup () {
     const store = useStore()

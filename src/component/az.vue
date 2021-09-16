@@ -18,10 +18,11 @@ export default {
   },
   setup () {
     return new Promise(resolve => {
-      const groupFilter = (arr, name) => {
+      const groupFilter = (arr, name, round) => {
+        const group = round === 1 ? 'a04' : 'a05'
         return arr.filter(item => item.a03 === name)
           .map((item, index, array) => {
-            const value = index === 0 ? parseInt(item.a04) : parseInt(item.a04) - parseInt(array[index - 1].a04)
+            const value = index === 0 ? parseInt(item.a04) : parseInt(item[group]) - parseInt(array[index - 1][group])
             return {
               x: time.formatter(item.a02),
               y: value
@@ -44,7 +45,7 @@ export default {
         },
         title: {
           display: true,
-          text: '每日施打疫苗人數(第一劑)',
+          text: '每日施打AZ疫苗人數',
           font: {
             size: 24
           }
@@ -70,23 +71,18 @@ export default {
     }
     api.getVaccine()
       .then(res => {
+        console.log(groupFilter(res, 'Oxford/AstraZeneca', 1))
         data.datasets.push({
-          label: 'AZ',
+          label: 'AZ 第一劑',
           fill: false,
-          backgroundColor: '#3B82F6',
-          data: groupFilter(res, 'Oxford/AstraZeneca')
+          backgroundColor: '#BE185D',
+          data: groupFilter(res, 'Oxford/AstraZeneca', 1)
         })
         data.datasets.push({
-          label: 'Moderna',
+          label: 'AZ 第二劑',
           fill: false,
-          backgroundColor: '#F9A8D4',
-          data: groupFilter(res, 'Moderna')
-        })
-        data.datasets.push({
-          label: '高端',
-          fill: false,
-          backgroundColor: '#6EE7B7',
-          data: groupFilter(res, '高端')
+          backgroundColor: '#FBCFE8',
+          data: groupFilter(res, 'Oxford/AstraZeneca', 2)
         })
         resolve({
           options,

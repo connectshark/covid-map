@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <vue3-chart-js
-      :id="'person'"
-      :type="'line'"
-      :data="data"
-      :options="options"
-    ></vue3-chart-js>
-  </div>
+  <vue3-chart-js
+    :id="'person'"
+    :type="'line'"
+    :data="data"
+    :options="options"
+  ></vue3-chart-js>
 </template>
 
 <script>
@@ -26,10 +24,11 @@ export default {
       datasets:[{
         label: '確診人數',
         borderColor: '#93C5FD',
-        borderWidth: 2,
+        borderWidth: 1,
         backgroundColor: '#3B82F6',
         fill: true,
         tension: 0.1,
+        pointRadius: 1,
         data: []
       }]
     }
@@ -47,6 +46,15 @@ export default {
           text: '每日確診人數',
           font: {
             size: 24
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          title: {
+            text: '人數',
+            display: true
           }
         }
       },
